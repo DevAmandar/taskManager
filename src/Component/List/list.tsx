@@ -12,7 +12,7 @@ export default function List({ list }: Props): ReactNode {
             <h3>{list.title}</h3>
             <div className="">
                 {list.items.map(item => (
-                    <Item key={item.id} item={item} />
+                    <Item key={item.id} item={item} list={list}/>
                 ))}
             </div>
         </div>
