@@ -1,5 +1,5 @@
-import Item from "../Component/Item/item"
-import { ListType } from "../Type/listType"
+import Item from "../Component/Item/Item"
+import { ListType } from "../Type/list-type"
 
 type Action =
     {

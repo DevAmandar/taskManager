@@ -1,4 +1,4 @@
-import type { ItemType } from "./itemType";
+import type { ItemType } from "./item-type";
 
 export type ListType = {
     id:string;

@@ -1,7 +1,8 @@
 import { ReactNode, useContext } from "react";
-import { ItemType } from "../../Type/itemType";
-import { BoardContext } from "../../Context/BoardContext";
-import { ListType } from "../../Type/listType";
+import { ItemType } from "../../Type/item-type";
+import { BoardContext } from "../../context/BoardContext";
+import { ListType } from "../../Type/list-type";
+import { MdDelete } from "react-icons/md";
 
 type Props={
     item:ItemType
@@ -16,9 +17,9 @@ export default function Item({item, list}:Props): ReactNode{
     }
 
     return(
-        <div className="flex justify-around border-2">
-            <span className="inline-block">{item.description}</span>
-            <button onClick={handleRemove} className="border-2 border-red-600">delete</button>
+        <div className="flex justify-between bg-white rounded-md p-1.5 m-1.5 cursor-pointer">
+            <p className="">{item.description}</p>
+            <MdDelete onClick={handleRemove} size={20}>delete</MdDelete>
         </div>
     )
 }

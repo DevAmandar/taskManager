@@ -1,9 +1,9 @@
 import React, { Children, PropsWithChildren, useReducer } from 'react'
 import type { ReactNode } from 'react'
-import { BoardContext } from '../Context/BoardContext'
-import type { ListType } from '../Type/listType'
-import { listData } from '../Data/ListData'
-import { ListReducers } from '../Reducers/listReducers'
+import { BoardContext } from '../context/BoardContext'
+import type { ListType } from '../Type/list-type'
+import { listData } from '../Data/listData'
+import { ListReducers } from '../Reducers/ListReducers'
 type Props = PropsWithChildren
 
 export default function BoardProvider({children} : Props) : ReactNode {
