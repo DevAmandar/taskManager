@@ -1,14 +1,13 @@
-import { createContext } from "react";
+import { ActionDispatch, createContext } from "react";
 import type { ListType } from "../Type/list-type";
+import { ListAction } from "../reducers/ListReducers";
 
 type ContextValue = {
     lists : ListType[];
-    add : () => void;
-    remove : (listId:string, itemId:string) => void;
+    dispatchLists: ActionDispatch<[action : ListAction]>
 }
 
 export const BoardContext = createContext<ContextValue>({
     lists: [],
-    add: () => {},
-    remove: () => {}
+    dispatchLists: () => {}
 })

@@ -1,7 +1,7 @@
 import React from 'react'
-import BoardProvider from '../Provider/BoardProvider'
+import BoardProvider from '../provider/BoardProvider'
 import Board from '../Component/Board/Board'
-import ActiveItemProvider from '../Provider/ActiveItemProvider'
+import ActiveItemProvider from '../provider/ActiveItemProvider'
 
 const BoardPage = () => {
   return (

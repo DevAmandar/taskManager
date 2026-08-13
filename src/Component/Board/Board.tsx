@@ -4,11 +4,7 @@ import List from '../List/List'
 import { MdOutlineModeEdit, MdAddCircleOutline } from "react-icons/md";
 
 export default function Board(): ReactNode {
-  const { lists, add } = useContext(BoardContext)
-
-  const handleAdd = () => {
-    add()
-  }
+  const { lists,dispatchLists } = useContext(BoardContext)
 
   return (
     <>
@@ -16,14 +12,14 @@ export default function Board(): ReactNode {
         <h1 className='font-bold'>Board Title</h1>
         <div className='flex gap-4'>
           <MdOutlineModeEdit className='cursor-pointer' size={23} />
-          <MdAddCircleOutline className='cursor-pointer' onClick={handleAdd} size={23}>add</MdAddCircleOutline>
+          <MdAddCircleOutline className='cursor-pointer' size={23}>add</MdAddCircleOutline>
         </div>
       </div>
       <div className='flex gap-2.5 m-7'>
         {
-          lists.map(list => (
+          lists.map((list, listIndex) => (
             <div key={list.id}>
-              <List list={list}></List>
+              <List list={list} listIndex={listIndex}></List>
             </div>
           ))
         }

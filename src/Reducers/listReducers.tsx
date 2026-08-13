@@ -1,9 +1,12 @@
 import Item from "../Component/Item/Item"
 import { ListType } from "../Type/list-type"
 
-type Action =
+export type ListAction =
     {
         type: 'add'
+        listIndex: number
+        itemId: string
+        title: string
     } |
     {
         type: 'remove'
@@ -11,7 +14,7 @@ type Action =
         itemId: string
     }
 
-export function ListReducers(state: ListType[], action: Action): ListType[] {
+export function ListReducers(state: ListType[], action: ListAction): ListType[] {
     switch (action.type) {
         case 'remove': {
             // debugger
@@ -22,8 +25,8 @@ export function ListReducers(state: ListType[], action: Action): ListType[] {
                 return state
             }
 
-            const clone=[...state]
-            const cloneList = {...clone[listIndex]}
+            const clone = [...state]
+            const cloneList = { ...clone[listIndex] }
             const itemIndex = cloneList.items.findIndex(item => item.id === action.itemId)
 
             if (itemIndex === -1) {
@@ -33,18 +36,18 @@ export function ListReducers(state: ListType[], action: Action): ListType[] {
 
             // cloneList.items.splice(itemIndex , 1)
             cloneList.items = cloneList.items.filter(item => item.id !== action.itemId)
-            clone[listIndex]=cloneList
+            clone[listIndex] = cloneList
             return clone
         }
-        case 'add':{
-            console.log()
-            const newItem={id:globalThis.crypto.randomUUID(), description:globalThis.crypto.randomUUID()}
-            const clone=[...state]
-            const updateFirstList = {
-                ...clone[0],
-                items: [...clone[0].items, newItem]
+        case 'add': {
+            
+            const newItem = { id: action.itemId, description: action.title}
+            const clone = [...state]
+            const updateList = {
+                ...clone[action.listIndex],
+                items: [...clone[action.listIndex].items, newItem]
             }
-            clone[0] = updateFirstList
+            clone[action.listIndex] = updateList
             return clone
         }
         default: {

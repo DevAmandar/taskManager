@@ -1,4 +1,4 @@
-import { ReactNode, useContext } from "react";
+import { ReactNode, useContext, useRef } from "react";
 import { ItemType } from "../../Type/item-type";
 import { BoardContext } from "../../context/BoardContext";
 import { ListType } from "../../Type/list-type";
@@ -12,10 +12,10 @@ type Props = {
 
 export default function Item({ item, list }: Props): ReactNode {
     // Remove
-    const { remove } = useContext(BoardContext)
+    const { dispatchLists } = useContext(BoardContext)
 
     const handleRemove = () => {
-        remove(list.id, item.id)
+        dispatchLists({type:'remove', listId:list.id, itemId:item.id})
     }
 
     // Active Item
@@ -27,6 +27,8 @@ export default function Item({ item, list }: Props): ReactNode {
 
     const { activeId } = useContext(ActiveItemContex)
 
+    //ref
+    const testRef = useRef(0)
     return (
         <div 
             onClick={handleClickItem}  
