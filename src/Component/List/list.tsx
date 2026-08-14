@@ -33,7 +33,7 @@ export default function List({ list, listIndex }: Props): ReactNode {
                 ))}
             </div>
             <Modal title={`Add Item to ${list.title}`} modalRef={modalRef}>
-                <CreatItemModal list={list} listIndex={listIndex} modalRef={modalRef}></CreatItemModal>
+                <CreatItemModal isList={false} list={list} listIndex={listIndex} modalRef={modalRef}></CreatItemModal>
             </Modal>
         </div>
     )
