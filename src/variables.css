@@ -1,0 +1,7 @@
+:root {
+    --bg-icon: #38383a;
+}
+
+.text-icon {
+    color: var(--bg-icon);
+}

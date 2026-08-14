@@ -1,8 +1,9 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode, RefObject, useRef } from "react";
 import type { ListType } from "../../Type/list-type";
 import Item from "../Item/Item";
 import { MdOutlineModeEdit, MdAddCircleOutline } from "react-icons/md";
 import Modal from "../Modal/Modal";
+import CreatItemModal from "../CreatItemModal/CreatItemModal";
 
 type Props = {
     list: ListType
@@ -22,8 +23,8 @@ export default function List({ list, listIndex }: Props): ReactNode {
             <div className='flex justify-between items-center'>
                 <h3 className='font-medium'>{list.title}</h3>
                 <div className='flex gap-2'>
-                    <MdOutlineModeEdit className="cursor-pointer" size={18} />
-                    <MdAddCircleOutline onClick={showModal} className="cursor-pointer" size={18}>add</MdAddCircleOutline>
+                    <MdOutlineModeEdit className="cursor-pointer text-icon" size={18} />
+                    <MdAddCircleOutline onClick={showModal} className="cursor-pointer text-icon" size={18} />
                 </div>
             </div>
             <div>
@@ -31,7 +32,9 @@ export default function List({ list, listIndex }: Props): ReactNode {
                     <Item key={item.id} item={item} list={list} />
                 ))}
             </div>
-            <Modal modalRef={modalRef} list={list} listIndex={listIndex}></Modal>
+            <Modal title={`Add Item to ${list.title}`} modalRef={modalRef}>
+                <CreatItemModal list={list} listIndex={listIndex} modalRef={modalRef}></CreatItemModal>
+            </Modal>
         </div>
     )
 }
