@@ -4,9 +4,9 @@ import List from '../List/List'
 import { MdOutlineModeEdit, MdAddCircleOutline } from "react-icons/md";
 import Modal from '../Modal/Modal';
 import CreatItemModal from '../CreatItemModal/CreatItemModal';
-
+import CreatListModal from '../CreatListModal/CreatListModal';
 export default function Board(): ReactNode {
-  
+
   const { lists, dispatchLists } = useContext(BoardContext)
 
   const modalRef = useRef<HTMLDialogElement | null>(null)
@@ -40,7 +40,9 @@ export default function Board(): ReactNode {
           ))
         }
       </div>
-      <Modal title='Add List' modalRef={modalRef} onSubmit={handleSubmit} />
+      <Modal title={`Add List`} modalRef={modalRef}>
+        <CreatListModal modalRef={modalRef} />
+      </Modal>
     </>
   )
 }

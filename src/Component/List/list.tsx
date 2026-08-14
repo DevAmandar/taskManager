@@ -14,6 +14,8 @@ type Props = {
 
 export default function List({ list, listIndex }: Props): ReactNode {
 
+    const modalRef = useRef<HTMLDialogElement | null>(null)
+
     const { dispatchLists } = useContext(BoardContext)
 
     // delete
@@ -21,7 +23,7 @@ export default function List({ list, listIndex }: Props): ReactNode {
         dispatchLists({ type: 'remove_list', listIndex: listIndex })
         notify()
     }
-
+    //toastify
     const notify = () => toast.success('successfully deletes', {
         position: "bottom-right",
         autoClose: 1500,
@@ -33,17 +35,10 @@ export default function List({ list, listIndex }: Props): ReactNode {
         theme: "light",
         transition: Bounce,
     });
-    //Modal
-    const modalRef = useRef<HTMLDialogElement | null>(null)
 
+    //Modal
     const showModal = () => {
         modalRef.current?.showModal()
-    }
-    const handleSubmit = (formData: FormData) => {
-        const title = formData.get('title') as string
-        const id = globalThis.crypto.randomUUID()
-
-        dispatchLists({ type: 'add_item', itemId: id, listIndex: listIndex, title: title })
     }
     return (
         <div className="w-[300px] p-3 bg-gray-200 rounded-md shadow-sm shadow-gray-400">
@@ -60,7 +55,9 @@ export default function List({ list, listIndex }: Props): ReactNode {
                     <Item key={item.id} item={item} list={list} />
                 ))}
             </div>
-            <Modal title={`Add Item to ${list.title}`} modalRef={modalRef} onSubmit={handleSubmit} />
+            <Modal title={`Add Item to ${list.title}`} modalRef={modalRef}>
+                <CreatItemModal listIndex={listIndex} modalRef={modalRef} />
+            </Modal>
         </div>
     )
 }
