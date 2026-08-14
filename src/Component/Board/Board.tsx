@@ -6,6 +6,7 @@ import Modal from '../Modal/Modal';
 import CreatItemModal from '../CreatItemModal/CreatItemModal';
 
 export default function Board(): ReactNode {
+  
   const { lists, dispatchLists } = useContext(BoardContext)
 
   const modalRef = useRef<HTMLDialogElement | null>(null)

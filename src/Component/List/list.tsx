@@ -5,30 +5,45 @@ import { MdOutlineModeEdit, MdAddCircleOutline, MdDeleteOutline } from "react-ic
 import Modal from "../Modal/Modal";
 import CreatItemModal from "../CreatItemModal/CreatItemModal";
 import { BoardContext } from "../../context/BoardContext";
+import { Bounce, toast } from "react-toastify";
 
 type Props = {
     list: ListType
-    listIndex:number
+    listIndex: number
 }
 
 export default function List({ list, listIndex }: Props): ReactNode {
 
     const { dispatchLists } = useContext(BoardContext)
 
+    // delete
     const handleDeleteList = () => {
-        dispatchLists({type:'remove_list', listIndex:listIndex})
+        dispatchLists({ type: 'remove_list', listIndex: listIndex })
+        notify()
     }
+
+    const notify = () => toast.success('successfully deletes', {
+        position: "bottom-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+    });
     //Modal
     const modalRef = useRef<HTMLDialogElement | null>(null)
 
-    const showModal =() => {
+    const showModal = () => {
         modalRef.current?.showModal()
     }
-    const handleSubmit = (formData : FormData) => {
+    const handleSubmit = (formData: FormData) => {
         const title = formData.get('title') as string
         const id = globalThis.crypto.randomUUID()
 
-        dispatchLists({type:'add_item', itemId:id, listIndex:listIndex, title:title})
+        dispatchLists({ type: 'add_item', itemId: id, listIndex: listIndex, title: title })
     }
     return (
         <div className="w-[300px] p-3 bg-gray-200 rounded-md shadow-sm shadow-gray-400">
@@ -37,7 +52,7 @@ export default function List({ list, listIndex }: Props): ReactNode {
                 <div className='flex gap-2'>
                     <MdOutlineModeEdit className="cursor-pointer text-icon" size={18} />
                     <MdAddCircleOutline onClick={showModal} className="cursor-pointer text-icon" size={18} />
-                    <MdDeleteOutline onClick={handleDeleteList} className="cursor-pointer text-icon" size={18}/> 
+                    <MdDeleteOutline onClick={handleDeleteList} className="cursor-pointer text-icon" size={18} />
                 </div>
             </div>
             <div>

@@ -4,6 +4,7 @@ import { BoardContext } from "../../context/BoardContext";
 import { ListType } from "../../Type/list-type";
 import { MdDelete } from "react-icons/md";
 import { ActiveItemContex } from "../../context/ActiveItemContext";
+import { Bounce, toast } from "react-toastify";
 
 type Props = {
     item: ItemType
@@ -15,24 +16,34 @@ export default function Item({ item, list }: Props): ReactNode {
     const { dispatchLists } = useContext(BoardContext)
 
     const handleRemove = () => {
-        dispatchLists({type:'remove', listId:list.id, itemId:item.id})
+        dispatchLists({ type: 'remove', listId: list.id, itemId: item.id })
+        notify()
     }
 
     // Active Item
     const { seActiveItem } = useContext(ActiveItemContex)
-    
+
     const handleClickItem = () => {
-        seActiveItem(item.id)  
+        seActiveItem(item.id)
     }
 
     const { activeId } = useContext(ActiveItemContex)
-
-    //ref
-    const testRef = useRef(0)
+    // toast
+    const notify = () => toast.success('successfully deletes', {
+        position: "bottom-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+    });
     return (
-        <div 
-            onClick={handleClickItem}  
-            className={`${ item.id === activeId ? 'outline-2 outline-blue-500' : ''} flex justify-between bg-white rounded-md p-1.5 m-2 cursor-pointer`}
+        <div
+            onClick={handleClickItem}
+            className={`${item.id === activeId ? 'outline-2 outline-blue-500' : ''} flex justify-between bg-white rounded-md p-1.5 m-2 cursor-pointer`}
         >
             <p>{item.description}</p>
             <MdDelete onClick={handleRemove} size={20}>delete</MdDelete>
