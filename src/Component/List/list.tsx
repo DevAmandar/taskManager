@@ -1,7 +1,7 @@
 import { ReactNode, RefObject, useContext, useRef } from "react";
 import type { ListType } from "../../Type/list-type";
 import Item from "../Item/Item";
-import { MdOutlineModeEdit, MdAddCircleOutline } from "react-icons/md";
+import { MdOutlineModeEdit, MdAddCircleOutline, MdDeleteOutline } from "react-icons/md";
 import Modal from "../Modal/Modal";
 import CreatItemModal from "../CreatItemModal/CreatItemModal";
 import { BoardContext } from "../../context/BoardContext";
@@ -14,6 +14,10 @@ type Props = {
 export default function List({ list, listIndex }: Props): ReactNode {
 
     const { dispatchLists } = useContext(BoardContext)
+
+    const handleDeleteList = () => {
+        dispatchLists({type:'remove_list', listIndex:listIndex})
+    }
     //Modal
     const modalRef = useRef<HTMLDialogElement | null>(null)
 
@@ -33,6 +37,7 @@ export default function List({ list, listIndex }: Props): ReactNode {
                 <div className='flex gap-2'>
                     <MdOutlineModeEdit className="cursor-pointer text-icon" size={18} />
                     <MdAddCircleOutline onClick={showModal} className="cursor-pointer text-icon" size={18} />
+                    <MdDeleteOutline onClick={handleDeleteList} className="cursor-pointer text-icon" size={18}/> 
                 </div>
             </div>
             <div>

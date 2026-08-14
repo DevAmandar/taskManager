@@ -14,6 +14,10 @@ export type ListAction =
         itemId: string
     } |
     {
+        type: 'remove_list'
+        listIndex: number
+    } |
+    {
         type: 'add_list'
         listId: string
         title: string
@@ -42,6 +46,12 @@ export function ListReducers(state: ListType[], action: ListAction): ListType[] 
             // cloneList.items.splice(itemIndex , 1)
             cloneList.items = cloneList.items.filter(item => item.id !== action.itemId)
             clone[listIndex] = cloneList
+            return clone
+        }
+        case 'remove_list': {
+
+            const clone = [...state]
+            clone.splice(action.listIndex, 1)
             return clone
         }
         case 'add_item': {
