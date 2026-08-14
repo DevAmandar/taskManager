@@ -14,6 +14,13 @@ export default function Board(): ReactNode {
     modalRef.current?.showModal()
   }
 
+  //submit
+  const handleSubmit = (formData: FormData) => {
+    const title = formData.get('title') as string
+    const id = globalThis.crypto.randomUUID()
+
+    dispatchLists({ type: 'add_list', listId: id, title: title })
+  }
   return (
     <>
       <div className='flex justify-between items-center m-6 p-3 rounded-md bg-gray-200 shadow-sm shadow-gray-400'>
@@ -32,9 +39,7 @@ export default function Board(): ReactNode {
           ))
         }
       </div>
-      <Modal title='Add List' modalRef={modalRef}>
-        <CreatItemModal isList={true} modalRef={modalRef}/>
-      </Modal>
+      <Modal title='Add List' modalRef={modalRef} onSubmit={handleSubmit} />
     </>
   )
 }

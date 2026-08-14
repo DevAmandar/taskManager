@@ -1,9 +1,10 @@
-import { ReactNode, RefObject, useRef } from "react";
+import { ReactNode, RefObject, useContext, useRef } from "react";
 import type { ListType } from "../../Type/list-type";
 import Item from "../Item/Item";
 import { MdOutlineModeEdit, MdAddCircleOutline } from "react-icons/md";
 import Modal from "../Modal/Modal";
 import CreatItemModal from "../CreatItemModal/CreatItemModal";
+import { BoardContext } from "../../context/BoardContext";
 
 type Props = {
     list: ListType
@@ -12,11 +13,18 @@ type Props = {
 
 export default function List({ list, listIndex }: Props): ReactNode {
 
+    const { dispatchLists } = useContext(BoardContext)
     //Modal
     const modalRef = useRef<HTMLDialogElement | null>(null)
 
     const showModal =() => {
         modalRef.current?.showModal()
+    }
+    const handleSubmit = (formData : FormData) => {
+        const title = formData.get('title') as string
+        const id = globalThis.crypto.randomUUID()
+
+        dispatchLists({type:'add_item', itemId:id, listIndex:listIndex, title:title})
     }
     return (
         <div className="w-[300px] p-3 bg-gray-200 rounded-md shadow-sm shadow-gray-400">
@@ -32,9 +40,7 @@ export default function List({ list, listIndex }: Props): ReactNode {
                     <Item key={item.id} item={item} list={list} />
                 ))}
             </div>
-            <Modal title={`Add Item to ${list.title}`} modalRef={modalRef}>
-                <CreatItemModal isList={false} list={list} listIndex={listIndex} modalRef={modalRef}></CreatItemModal>
-            </Modal>
+            <Modal title={`Add Item to ${list.title}`} modalRef={modalRef} onSubmit={handleSubmit} />
         </div>
     )
 }
