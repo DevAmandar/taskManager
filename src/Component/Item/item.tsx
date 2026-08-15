@@ -5,6 +5,7 @@ import { ListType } from "../../Type/list-type";
 import { MdDelete } from "react-icons/md";
 import { ActiveItemContex } from "../../context/ActiveItemContext";
 import { Bounce, toast } from "react-toastify";
+import DraggableComponent from "../../drag and drop/drag/DraggableComponent";
 
 type Props = {
     item: ItemType
@@ -40,13 +41,17 @@ export default function Item({ item, list }: Props): ReactNode {
         theme: "light",
         transition: Bounce,
     });
+
     return (
-        <div
-            onClick={handleClickItem}
-            className={`${item.id === activeId ? 'outline-2 outline-blue-500' : ''} flex justify-between bg-white rounded-md p-1.5 m-2 cursor-pointer`}
-        >
-            <p>{item.description}</p>
-            <MdDelete onClick={handleRemove} size={20}>delete</MdDelete>
-        </div>
+        <DraggableComponent id={item.id}>
+            <div
+                onClick={handleClickItem}
+                className={`${item.id === activeId ? 'outline-2 outline-blue-500' : ''} flex justify-between bg-white rounded-md p-1.5 m-2 cursor-pointer`}
+            >
+                <p className="select-none">{item.description}</p>
+                <MdDelete onClick={handleRemove} size={20}>delete</MdDelete>
+            </div>
+        </DraggableComponent>
+
     )
 }

@@ -7,11 +7,14 @@ import { DragDropProvider } from '@dnd-kit/react'
 
 const BoardPage = () => {
 
+  const handleDragEnd=() => {
+    console.log('dragged')
+  }
 
   return (
     <BoardProvider>
       <ActiveItemProvider>
-        <DragDropProvider>
+        <DragDropProvider onDragEnd={handleDragEnd}>
           <Board></Board>
         </DragDropProvider>
         <ToastContainer />
