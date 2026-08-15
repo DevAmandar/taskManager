@@ -1,4 +1,5 @@
 import Item from "../Component/Item/Item"
+import { ItemType } from "../Type/item-type"
 import { ListType } from "../Type/list-type"
 
 export type ListAction =
@@ -21,6 +22,13 @@ export type ListAction =
         type: 'add_list'
         listId: string
         title: string
+    } |
+    {
+        type: 'move_item'
+        toListId: string
+        fromListId: string
+        itemId: string
+        item: ItemType & {listId: string}
     }
 
 export function ListReducers(state: ListType[], action: ListAction): ListType[] {
@@ -69,6 +77,29 @@ export function ListReducers(state: ListType[], action: ListAction): ListType[] 
 
             const newList={id:action.listId, title:action.title, items:[]}
             const clone=[...state, newList]
+            return clone
+        }
+        case 'move_item': {
+            // debugger
+            const toListIndex = state.findIndex(list => list.id === action.toListId)
+            const fromListIndex = state.findIndex(list => list.id === action.fromListId)
+            if (toListIndex === -1 || fromListIndex== -1){
+                console.error('cannot find list')
+                return state
+            }
+            
+            const newItem=action.item
+
+            const clone=[...state]
+            clone[fromListIndex].items = clone[fromListIndex].items.filter(item => 
+                item.id !== action.itemId
+            )
+            console.log(clone[fromListIndex].items)
+            clone[toListIndex] = {
+                ...clone[toListIndex],
+                items: [...clone[toListIndex].items, newItem]
+            }
+
             return clone
         }
         default: {

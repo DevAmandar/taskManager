@@ -1,4 +1,5 @@
-import { ReactNode, useContext, useRef } from "react";
+// Item.tsx
+import { ReactNode, useContext, useState } from "react";
 import { ItemType } from "../../Type/item-type";
 import { BoardContext } from "../../context/BoardContext";
 import { ListType } from "../../Type/list-type";
@@ -13,23 +14,26 @@ type Props = {
 }
 
 export default function Item({ item, list }: Props): ReactNode {
-    // Remove
+    const [isRemoving, setIsRemoving] = useState(false)
     const { dispatchLists } = useContext(BoardContext)
 
     const handleRemove = () => {
-        dispatchLists({ type: 'remove', listId: list.id, itemId: item.id })
-        notify()
+        setIsRemoving(true)
+        // بعد از انیمیشن، dispatch را صدا بزن
+        setTimeout(() => {
+            dispatchLists({ type: 'remove', listId: list.id, itemId: item.id })
+            notify()
+        }, 300) // هماهنگ با duration انیمیشن
     }
 
     // Active Item
     const { seActiveItem } = useContext(ActiveItemContex)
-
     const handleClickItem = () => {
         seActiveItem(item.id)
     }
 
     const { activeId } = useContext(ActiveItemContex)
-    // toast
+
     const notify = () => toast.success('successfully deletes', {
         position: "bottom-right",
         autoClose: 1500,
@@ -43,15 +47,19 @@ export default function Item({ item, list }: Props): ReactNode {
     });
 
     return (
-        <DraggableComponent id={item.id}>
+        <DraggableComponent id={item.id} data={{...item, listId:list.id}} >
             <div
                 onClick={handleClickItem}
-                className={`${item.id === activeId ? 'outline-2 outline-blue-500' : ''} flex justify-between bg-white rounded-md p-1.5 m-2 cursor-pointer`}
+                className={`
+                    ${item.id === activeId ? 'outline-2 outline-blue-500' : ''} 
+                    flex justify-between bg-white rounded-md p-1.5 m-2 cursor-pointer
+                    transition-all duration-300 ease-in-out
+                    ${isRemoving ? 'opacity-0 translate-x-[-20px] outline-none overflow-hidden' : ''}
+                `}
             >
-                <p className="select-none">{item.description}</p>
+                <p>{item.description}</p>
                 <MdDelete onClick={handleRemove} size={20}>delete</MdDelete>
             </div>
         </DraggableComponent>
-
     )
 }

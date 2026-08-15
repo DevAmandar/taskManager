@@ -5,3 +5,11 @@
 .text-icon {
     color: var(--bg-icon);
 }
+
+/* در فایل CSS یا Tailwind */
+.item-removing {
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-20px);
+    overflow: hidden;
+}
