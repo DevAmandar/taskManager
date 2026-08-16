@@ -6,8 +6,12 @@ import Modal from '../Modal/Modal';
 import CreatItemModal from '../CreatItemModal/CreatItemModal';
 import CreatListModal from '../CreatListModal/CreatListModal';
 
+import { useParams } from "react-router";
 import { NavLink, Link } from "react-router";
+
 export default function Board(): ReactNode {
+
+  let params = useParams();
 
   const { lists, dispatchLists } = useContext(BoardContext)
 
@@ -27,7 +31,7 @@ export default function Board(): ReactNode {
   return (
     <>
       <div className='flex justify-between items-center m-6 p-3 rounded-md bg-gray-200 shadow-sm shadow-gray-400'>
-        <Link to="/test" className='font-bold'>Board Title</Link>
+        <Link to="/test" className='font-bold'>Board Title {params.id}</Link>
         <div className='flex gap-4'>
           <MdOutlineModeEdit className='cursor-pointer text-icon' size={23} />
           <MdAddCircleOutline onClick={showModal} className='cursor-pointer text-icon' size={23} />
