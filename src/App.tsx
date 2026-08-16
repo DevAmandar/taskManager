@@ -1,10 +1,17 @@
+import { Route, Routes } from 'react-router'
 import BoardPage from './layout/BoardPage'
 import BoardProvider from './provider/BoardProvider'
+import Test from './Test'
 
 function App() {
   return (
     <BoardProvider>
-      <BoardPage />
+
+      <Routes>
+        <Route path="/" element={<BoardPage />} />
+        <Route path='test' element={<Test />} />
+      </Routes>
+
     </BoardProvider>
   )
 }

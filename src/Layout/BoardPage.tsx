@@ -7,6 +7,7 @@ import { DragDropProvider, DragEndEvent } from '@dnd-kit/react'
 import { useConstant } from '@dnd-kit/react/hooks'
 import  {BoardContext}  from '../context/BoardContext'
 import { ItemType } from '../Type/item-type'
+import { Outlet } from 'react-router'
 
 const BoardPage = () => {
 
@@ -31,7 +32,9 @@ const BoardPage = () => {
   return (
       <ActiveItemProvider>
         <DragDropProvider onDragEnd={handleDragEnd}>
+
           <Board></Board>
+          
         </DragDropProvider>
         <ToastContainer />
       </ActiveItemProvider>
