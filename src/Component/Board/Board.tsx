@@ -7,11 +7,12 @@ import CreatItemModal from '../CreatItemModal/CreatItemModal';
 import CreatListModal from '../CreatListModal/CreatListModal';
 
 import { useParams } from "react-router";
-import { NavLink, Link } from "react-router";
+import { Link } from "react-router";
 
 export default function Board(): ReactNode {
 
   let params = useParams();
+  const boardIndex = parseInt(params.id!, 10)
 
   const { lists, dispatchLists } = useContext(BoardContext)
 
@@ -26,7 +27,7 @@ export default function Board(): ReactNode {
     const title = formData.get('title') as string
     const id = globalThis.crypto.randomUUID()
 
-    dispatchLists({ type: 'add_list', listId: id, title: title })
+    dispatchLists({ type: 'add_list',boardIndex: boardIndex,  listId: id, title: title })
   }
   return (
     <>
@@ -39,15 +40,15 @@ export default function Board(): ReactNode {
       </div>
       <div className='flex gap-2.5 m-7'>
         {
-          lists.map((list, listIndex) => (
+          lists[boardIndex].map((list, listIndex) => (
             <div key={list.id}>
-              <List list={list} listIndex={listIndex}></List>
+              <List boardIndex={boardIndex} list={list} listIndex={listIndex}></List>
             </div>
           ))
         }
       </div>
       <Modal title={`Add List`} modalRef={modalRef}>
-        <CreatListModal modalRef={modalRef} />
+        <CreatListModal modalRef={modalRef} boardIndex={boardIndex}/>
       </Modal>
     </>
   )

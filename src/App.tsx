@@ -10,7 +10,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<TasksPage />} />
-        <Route path="page/:id" element={<BoardPage />} />
+        <Route path="boardPage/:id" element={<BoardPage />} />
         <Route path='test' element={<Test />} />
       </Routes>
 

@@ -5,8 +5,9 @@ import { BoardContext } from "../../context/BoardContext";
 
 type Props = PropsWithChildren<{
     modalRef: RefObject<HTMLDialogElement | null>
+    boardIndex: number
 }>
-export default function CreatListModal({ modalRef }: Props): ReactNode {
+export default function CreatListModal({ modalRef, boardIndex }: Props): ReactNode {
 
       const formRef = useRef<HTMLFormElement>(null)
 
@@ -24,7 +25,7 @@ export default function CreatListModal({ modalRef }: Props): ReactNode {
         const title = formData.get('title') as string
         const id = globalThis.crypto.randomUUID()
 
-        dispatchLists({ type: 'add_list',listId:id , title: title })
+        dispatchLists({ type: 'add_list',boardIndex: boardIndex, listId:id , title: title })
         formRef.current?.reset()
         modalRef.current?.close()
     }

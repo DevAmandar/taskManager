@@ -12,16 +12,16 @@ type Props = PropsWithChildren
 export default function BoardProvider({children} : Props) : ReactNode {
 
     
-    const intialData = (): ListType[] => {
+    const intialData = (): ListType[][] => {
         const stored = localStorage.getItem('boardData')
         if(stored){
             try{
-                return JSON.parse(stored) as ListType[]
+                return JSON.parse(stored) as ListType[][]
             } catch {
-                return listData
+                return listDatas
             }
         }
-        return listData
+        return listDatas
     }
 
     const [lists , dispatchLists] = useReducer(ListReducers, intialData())

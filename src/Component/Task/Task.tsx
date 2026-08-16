@@ -9,7 +9,7 @@ export default function Task({id}: Props): ReactNode {
     return (
         <div className="border-2 w-[335px]">
             <div className="border-b-2">
-                <Link to={`page/:${id}`}>
+                <Link to={`boardPage/${id}`}>
                     <h2 className="p-2.5">title task</h2>
                 </Link>
             </div>

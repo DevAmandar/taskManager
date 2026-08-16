@@ -11,9 +11,10 @@ import DraggableComponent from "../../drag and drop/drag/DraggableComponent";
 type Props = {
     item: ItemType
     list: ListType
+    boardIndex: number
 }
 
-export default function Item({ item, list }: Props): ReactNode {
+export default function Item({ item, list, boardIndex }: Props): ReactNode {
     const [isRemoving, setIsRemoving] = useState(false)
     const { dispatchLists } = useContext(BoardContext)
 
@@ -21,7 +22,7 @@ export default function Item({ item, list }: Props): ReactNode {
         setIsRemoving(true)
         // بعد از انیمیشن، dispatch را صدا بزن
         setTimeout(() => {
-            dispatchLists({ type: 'remove', listId: list.id, itemId: item.id })
+            dispatchLists({ type: 'remove',boardIndex: boardIndex, listId: list.id, itemId: item.id })
             notify()
         }, 300) // هماهنگ با duration انیمیشن
     }

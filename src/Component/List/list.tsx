@@ -11,9 +11,10 @@ import DroppableComponent from "../../drag and drop/drop/DroppableComponent";
 type Props = {
     list: ListType
     listIndex: number
+     boardIndex: number 
 }
 
-export default function List({ list, listIndex }: Props): ReactNode {
+export default function List({ list, listIndex, boardIndex }: Props): ReactNode {
 
     const modalRef = useRef<HTMLDialogElement | null>(null)
 
@@ -21,7 +22,7 @@ export default function List({ list, listIndex }: Props): ReactNode {
 
     // delete
     const handleDeleteList = () => {
-        dispatchLists({ type: 'remove_list', listIndex: listIndex })
+        dispatchLists({ type: 'remove_list',boardIndex: boardIndex, listIndex: listIndex })
         notify()
     }
     //toastify
@@ -54,11 +55,11 @@ export default function List({ list, listIndex }: Props): ReactNode {
                 </div>
                 <div>
                     {list.items.map(item => (
-                        <Item key={item.id} item={item} list={list} />
+                        <Item boardIndex={boardIndex} key={item.id} item={item} list={list} />
                     ))}
                 </div>
                 <Modal title={`Add Item to ${list.title}`} modalRef={modalRef}>
-                    <CreatItemModal listIndex={listIndex} modalRef={modalRef} />
+                    <CreatItemModal boardIndex={boardIndex} listIndex={listIndex} modalRef={modalRef} />
                 </Modal>
             </div>
         </DroppableComponent>
