@@ -40,7 +40,7 @@ export default function Board(): ReactNode {
       </div>
       <div className='flex gap-2.5 m-7'>
         {
-          lists[boardIndex].map((list, listIndex) => (
+          lists[boardIndex].lists.map((list, listIndex) => (
             <div key={list.id}>
               <List boardIndex={boardIndex} list={list} listIndex={listIndex}></List>
             </div>

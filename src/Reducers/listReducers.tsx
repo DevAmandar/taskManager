@@ -1,5 +1,7 @@
+// reducers/ListReducers.tsx
 import { ItemType } from "../Type/item-type"
 import { ListType } from "../Type/list-type"
+import { BoardType } from "../Type/board-type"
 
 export type ListAction =
     {
@@ -35,85 +37,134 @@ export type ListAction =
         item: ItemType & { listId: string }
     }
 
-export function ListReducers(state: ListType[][], action: ListAction): ListType[][] {
+
+export function ListReducers(state: BoardType[], action: ListAction): BoardType[] {
     switch (action.type) {
         case 'remove': {
             const { boardIndex, listId, itemId } = action
+            
+            const board = state[boardIndex]
+            if (!board) {
+                console.error('Board not found')
+                return state
+            }
 
-            console.log('state = ',state)
-            console.log('boardIndex = ',boardIndex)
-            console.log('state[boardIndex] = ',state[boardIndex])
-
-            const listIndex = state[boardIndex].findIndex(list => list.id === listId)
+            const listIndex = board.lists.findIndex(list => list.id === listId)
 
             if (listIndex === -1) {
                 console.error('cannot find desired list')
                 return state
             }
 
-            const clone = [...state[boardIndex]]
-            const cloneList = { ...clone[listIndex] }
-            cloneList.items = cloneList.items.filter(item => item.id !== itemId)
-            clone[listIndex] = cloneList
 
-            const updatState = [...state]
-            updatState[boardIndex] = clone
-            return updatState
+            const updatedLists = [...board.lists]
+            const updatedList = {
+                ...updatedLists[listIndex],
+                items: updatedLists[listIndex].items.filter(item => item.id !== itemId)
+            }
+            updatedLists[listIndex] = updatedList
+
+
+            const updatedState = [...state]
+            updatedState[boardIndex] = {
+                ...board,
+                lists: updatedLists
+            }
+            return updatedState
         }
+
         case 'remove_list': {
             const { boardIndex, listIndex } = action
-            const clone = [...state[boardIndex]]
-            clone.splice(listIndex, 1)
+            
+            const board = state[boardIndex]
+            if (!board) return state
 
-            const updatState = [...state]
-            updatState[boardIndex] = clone
-            return updatState
+            const updatedLists = [...board.lists]
+            updatedLists.splice(listIndex, 1)
+
+            const updatedState = [...state]
+            updatedState[boardIndex] = {
+                ...board,
+                lists: updatedLists
+            }
+            return updatedState
         }
+
         case 'add_item': {
             const { boardIndex, listIndex, itemId, title } = action
-            const newItem = { id: itemId, description: title }
-            const clone = [...state[boardIndex]]
-            const updateList = {
-                ...clone[listIndex],
-                items: [...clone[listIndex].items, newItem]
-            }
-            clone[listIndex] = updateList
+            
+            const board = state[boardIndex]
+            if (!board) return state
 
-            const updatState = [...state]
-            updatState[boardIndex] = clone
-            return updatState
+            const newItem = { id: itemId, description: title }
+            const updatedLists = [...board.lists]
+            updatedLists[listIndex] = {
+                ...updatedLists[listIndex],
+                items: [...updatedLists[listIndex].items, newItem]
+            }
+
+            const updatedState = [...state]
+            updatedState[boardIndex] = {
+                ...board,
+                lists: updatedLists
+            }
+            return updatedState
         }
+
         case 'add_list': {
             const { boardIndex, listId, title } = action
-            const newList = { id: listId, title: title, items: [] }
-            const clone = [...state[boardIndex], newList]
+            
+            const board = state[boardIndex]
+            if (!board) return state
 
-            const updatState = [...state]
-            updatState[boardIndex] = clone
-            return updatState
+            const newList = { id: listId, title: title, items: [] }
+            const updatedLists = [...board.lists, newList]
+
+            const updatedState = [...state]
+            updatedState[boardIndex] = {
+                ...board,
+                lists: updatedLists
+            }
+            return updatedState
         }
+
         case 'move_item': {
             const { boardIndex, toListId, fromListId, itemId, item } = action
-            const toListIndex = state[boardIndex].findIndex(list => list.id === toListId)
-            const fromListIndex = state[boardIndex].findIndex(list => list.id === fromListId)
+            
+            const board = state[boardIndex]
+            if (!board) return state
+
+            const toListIndex = board.lists.findIndex(list => list.id === toListId)
+            const fromListIndex = board.lists.findIndex(list => list.id === fromListId)
             
             if (toListIndex === -1 || fromListIndex === -1) {
                 console.error('cannot find list')
                 return state
             }
 
-            const newItem = item
-            const clone = [...state[boardIndex]]
-            clone[fromListIndex].items = clone[fromListIndex].items.filter(item => item.id !== itemId)
-            clone[toListIndex] = {
-                ...clone[toListIndex],
-                items: [...clone[toListIndex].items, newItem]
+            const updatedLists = [...board.lists]
+            
+
+            updatedLists[fromListIndex] = {
+                ...updatedLists[fromListIndex],
+                items: updatedLists[fromListIndex].items.filter(
+                    listItem => listItem.id !== itemId
+                )
+            }
+            
+            updatedLists[toListIndex] = {
+                ...updatedLists[toListIndex],
+                items: [...updatedLists[toListIndex].items, item]
             }
 
-            const updatState = [...state]
-            updatState[boardIndex] = clone
-            return updatState
+            const updatedState = [...state]
+            updatedState[boardIndex] = {
+                ...board,
+                lists: updatedLists
+            }
+            return updatedState
         }
+
         default: {
             throw new Error("Unknown action")
         }
