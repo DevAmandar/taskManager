@@ -1,5 +1,5 @@
 import { FormEvent, PropsWithChildren, ReactNode, RefObject, useContext, useRef } from "react";
-import Modal from "../Modal/Modal";
+import Modal from "../Modal";
 import { ListType } from "../../Type/list-type";
 import { BoardContext } from "../../context/BoardContext";
 

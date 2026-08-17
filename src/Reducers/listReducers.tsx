@@ -35,6 +35,12 @@ export type ListAction =
         fromListId: string
         itemId: string
         item: ItemType & { listId: string }
+    } |
+    {
+        type: 'add_task'
+        taskTitle: string
+        taskId: string
+        description: string
     }
 
 
@@ -42,7 +48,7 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
     switch (action.type) {
         case 'remove': {
             const { boardIndex, listId, itemId } = action
-            
+
             const board = state[boardIndex]
             if (!board) {
                 console.error('Board not found')
@@ -75,7 +81,7 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
 
         case 'remove_list': {
             const { boardIndex, listIndex } = action
-            
+
             const board = state[boardIndex]
             if (!board) return state
 
@@ -92,7 +98,7 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
 
         case 'add_item': {
             const { boardIndex, listIndex, itemId, title } = action
-            
+
             const board = state[boardIndex]
             if (!board) return state
 
@@ -113,7 +119,7 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
 
         case 'add_list': {
             const { boardIndex, listId, title } = action
-            
+
             const board = state[boardIndex]
             if (!board) return state
 
@@ -130,20 +136,20 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
 
         case 'move_item': {
             const { boardIndex, toListId, fromListId, itemId, item } = action
-            
+
             const board = state[boardIndex]
             if (!board) return state
 
             const toListIndex = board.lists.findIndex(list => list.id === toListId)
             const fromListIndex = board.lists.findIndex(list => list.id === fromListId)
-            
+
             if (toListIndex === -1 || fromListIndex === -1) {
                 console.error('cannot find list')
                 return state
             }
 
             const updatedLists = [...board.lists]
-            
+
 
             updatedLists[fromListIndex] = {
                 ...updatedLists[fromListIndex],
@@ -151,7 +157,7 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
                     listItem => listItem.id !== itemId
                 )
             }
-            
+
             updatedLists[toListIndex] = {
                 ...updatedLists[toListIndex],
                 items: [...updatedLists[toListIndex].items, item]
@@ -163,6 +169,24 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
                 lists: updatedLists
             }
             return updatedState
+        }
+        case 'add_task': {
+            const { taskId, taskTitle, description } = action
+
+            const cloneState = [...state]
+
+            const newTask = {
+                taskId: taskId,
+                taskTitle: taskTitle,
+                description: description,
+                lists: []
+            } as BoardType
+
+            cloneState.push(newTask)
+
+            console.log('reducer newTask = ', newTask)
+            console.log('reducer cloneState = ', cloneState)
+            return cloneState
         }
 
         default: {

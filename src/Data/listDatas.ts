@@ -3,6 +3,7 @@ export const listDatas = [
     {
         taskId: '1',
         taskTitle: 'title 1',
+        description:"kdslkcd;vmdfjofjmolvmkldfnvdf",
         lists: [
             {
                 id: 'list_1',
@@ -26,6 +27,7 @@ export const listDatas = [
     {
         taskId: '2',
         taskTitle: 'title 2',
+        description:"kdslkcd;vmdfjofjmolvmkldfnvdf",
         lists: [
             {
                 id: 'list_3',
@@ -49,6 +51,7 @@ export const listDatas = [
     {
         taskId: '3',
         taskTitle: 'title 3',
+        description:"kdslkcd;vmdfjofjmolvmkldfnvdf",
         lists: [
             {
                 id: 'list_5',

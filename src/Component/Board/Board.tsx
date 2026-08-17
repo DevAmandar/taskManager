@@ -2,9 +2,9 @@ import React, { FormEvent, ReactNode, useContext, useRef } from 'react'
 import { BoardContext } from '../../context/BoardContext'
 import List from '../List/List'
 import { MdOutlineModeEdit, MdAddCircleOutline } from "react-icons/md";
-import Modal from '../Modal/Modal';
-import CreatItemModal from '../CreatItemModal/CreatItemModal';
-import CreatListModal from '../CreatListModal/CreatListModal';
+import Modal from '../../modal/Modal';
+import CreatItemModal from '../../modal/CreatItemModal/CreatItemModal';
+import CreatListModal from '../../modal/CreatListModal/CreatListModal';
 
 import { useParams } from "react-router";
 import { Link } from "react-router";

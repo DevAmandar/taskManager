@@ -1,11 +1,11 @@
 import { FormEvent, PropsWithChildren, ReactNode, RefObject, use, useContext, useRef } from "react";
-import type { ListType } from "../../Type/list-type";
-import { BoardContext } from "../../context/BoardContext";
+import type { ListType } from "../Type/list-type";
+import { BoardContext } from "../context/BoardContext";
 import { IoMdClose } from "react-icons/io";
 
 type Props = PropsWithChildren<{
     title: string
-        modalRef: RefObject<HTMLDialogElement | null>
+    modalRef: RefObject<HTMLDialogElement | null>
 }>
 export default function Modal({ title, children, modalRef }: Props): ReactNode {
 
