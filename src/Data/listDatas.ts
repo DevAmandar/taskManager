@@ -3,23 +3,21 @@ export const listDatas = [
     {
         taskId: '1',
         taskTitle: 'title 1',
-        description:"kdslkcd;vmdfjofjmolvmkldfnvdf",
+        description:"descreiption...",
         lists: [
             {
                 id: 'list_1',
                 title: 'To Do',
                 items: [
-                    { id: '1', description: 'one tod do' },
-                    { id: '2', description: 'two tod do' },
-                    { id: '3', description: 'three tod do' }
+                    { id: '1', description: 'Task 1' },
+                    { id: '2', description: 'Task 2' },
                 ]
             },
             {
                 id: 'list_2',
                 title: 'Done',
                 items: [
-                    { id: '4', description: 'one done' },
-                    { id: '5', description: 'two done' }
+                    { id: '4', description: 'Task 3' },
                 ]
             }
         ]
@@ -27,7 +25,7 @@ export const listDatas = [
     {
         taskId: '2',
         taskTitle: 'title 2',
-        description:"kdslkcd;vmdfjofjmolvmkldfnvdf",
+        description:"",
         lists: [
             {
                 id: 'list_3',

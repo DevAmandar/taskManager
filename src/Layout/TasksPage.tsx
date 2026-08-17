@@ -23,7 +23,7 @@ export default function TasksPage(): ReactNode {
             </header>
             <div className="mt-20 ml-3.5 flex items-center  gap-2.5 flex-wrap">
                 {lists.map((data, index) => (
-                    <Task key={data.taskId} id={index} title={data.taskTitle} description={data.description}/>
+                    <Task key={data.taskId} id={data.taskId} boardIndex={index} title={data.taskTitle} description={data.description}/>
                 ))}
             </div>
             <Modal modalRef={modalRef} title="Create new task">

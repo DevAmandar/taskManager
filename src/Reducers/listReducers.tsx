@@ -41,6 +41,10 @@ export type ListAction =
         taskTitle: string
         taskId: string
         description: string
+    } |
+    {
+        type: 'remove_task'
+        taskId: string
     }
 
 
@@ -183,10 +187,14 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
             } as BoardType
 
             cloneState.push(newTask)
-
-            console.log('reducer newTask = ', newTask)
-            console.log('reducer cloneState = ', cloneState)
             return cloneState
+        }
+        case 'remove_task': {
+            // debugger
+            const { taskId } = action
+            const clone=[...state]
+            const updateState = clone.filter(board => board.taskId !== taskId)
+            return updateState
         }
 
         default: {
