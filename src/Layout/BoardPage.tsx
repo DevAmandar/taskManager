@@ -18,7 +18,6 @@ const BoardPage = () => {
   const boardIndex = parseInt(params.id!, 10)
 
   const { dispatchLists } = useContext(BoardContext)
-
   
   const handleDragEnd = (e: DragEndEvent) => {
 
@@ -48,7 +47,6 @@ const BoardPage = () => {
           <EditTitleTaskModal modalRef={modalRef} boardIndex={boardIndex} />
         </Modal>
       </DragDropProvider>
-      <ToastContainer />
     </ActiveItemProvider>
   )
 }

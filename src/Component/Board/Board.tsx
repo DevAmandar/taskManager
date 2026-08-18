@@ -2,6 +2,7 @@ import React, { FormEvent, ReactNode, useContext, useRef } from 'react'
 import { BoardContext } from '../../context/BoardContext'
 import List from '../List/List'
 import { MdOutlineModeEdit, MdAddCircleOutline } from "react-icons/md";
+import { BiLogOut } from "react-icons/bi";
 import Modal from '../../modal/Modal';
 import CreatItemModal from '../../modal/CreatItemModal/CreatItemModal';
 import CreatListModal from '../../modal/CreatListModal/CreatListModal';
@@ -10,9 +11,9 @@ import { useParams } from "react-router";
 import { Link } from "react-router";
 
 type Props = {
-  onClick : () => void
+  onClick: () => void
 }
-export default function Board( { onClick }: Props): ReactNode {
+export default function Board({ onClick }: Props): ReactNode {
 
   let params = useParams();
   const boardIndex = parseInt(params.id!, 10)
@@ -33,6 +34,9 @@ export default function Board( { onClick }: Props): ReactNode {
       <div className='flex justify-between items-center m-6 p-3 rounded-md bg-gray-200 shadow-sm shadow-gray-400'>
         <Link to="/test" className='font-bold'>{lists[boardIndex].taskTitle}</Link>
         <div className='flex gap-4'>
+          <Link to='/'>
+            <BiLogOut className='cursor-pointer text-icon' size={23} />
+          </Link>
           <MdOutlineModeEdit onClick={handleEditTitleBoard} className='cursor-pointer text-icon' size={23} />
           <MdAddCircleOutline onClick={showModal} className='cursor-pointer text-icon' size={23} />
         </div>
@@ -47,7 +51,7 @@ export default function Board( { onClick }: Props): ReactNode {
         }
       </div>
       <Modal title={`Add List`} modalRef={modalRef}>
-        <CreatListModal modalRef={modalRef} boardIndex={boardIndex}/>
+        <CreatListModal modalRef={modalRef} boardIndex={boardIndex} />
       </Modal>
     </>
   )

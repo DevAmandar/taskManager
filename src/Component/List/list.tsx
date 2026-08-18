@@ -1,4 +1,4 @@
-import { ReactNode, RefObject, useContext, useRef } from "react";
+import { ReactNode, RefObject, useContext, useRef, useState } from "react";
 import type { ListType } from "../../Type/list-type";
 import Item from "../Item/Item";
 import { MdOutlineModeEdit, MdAddCircleOutline, MdDeleteOutline } from "react-icons/md";
@@ -12,10 +12,12 @@ import EditTitleListModal from "../../modal/EditTitleListModal/EditTitleListModa
 type Props = {
     list: ListType
     listIndex: number
-     boardIndex: number 
+    boardIndex: number
 }
 
 export default function List({ list, listIndex, boardIndex }: Props): ReactNode {
+
+    const [isRemoving, setIsRemoving] = useState(false)
 
     const modalRef = useRef<HTMLDialogElement | null>(null)
     const editModalRef = useRef<HTMLDialogElement | null>(null)
@@ -24,8 +26,13 @@ export default function List({ list, listIndex, boardIndex }: Props): ReactNode 
 
     // delete
     const handleDeleteList = () => {
-        dispatchLists({ type: 'remove_list',boardIndex: boardIndex, listIndex: listIndex })
-        notify()
+        setIsRemoving(true)
+
+        setTimeout(() => {
+            dispatchLists({ type: 'remove_list', boardIndex: boardIndex, listIndex: listIndex })
+            notify()
+
+        }, 300)
     }
     //toastify
     const notify = () => toast.success('successfully deletes', {
@@ -51,7 +58,8 @@ export default function List({ list, listIndex, boardIndex }: Props): ReactNode 
     }
     return (
         <DroppableComponent id={list.id}>
-            <div className="w-[300px] p-3 bg-gray-200 rounded-md shadow-sm shadow-gray-400">
+            <div className={`w-[300px] p-3 bg-gray-200 rounded-md shadow-sm shadow-gray-400 transition-all duration-300 ease-in-out  
+                ${isRemoving ? ' opacity-0 translate-x-[-15px] outline-none overflow-hidden ' : ''}`}>
                 <div className='flex justify-between items-center'>
                     <h3 className='font-medium'>{list.title}</h3>
                     <div className='flex gap-2'>
