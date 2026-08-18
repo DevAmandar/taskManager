@@ -50,6 +50,12 @@ export type ListAction =
         type: 'rename_board'
         boardIndex: number
         title: string
+    } |
+    {
+        type: 'rename_list_title'
+        boardIndex: number
+        listIndex: number
+        title: string
     }
 
 
@@ -212,6 +218,27 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
             updateState[boardIndex] = {
                 ...board,
                 taskTitle: title
+            }
+
+            return updateState
+        }
+        case 'rename_list_title': {
+            const { boardIndex, listIndex, title} = action
+
+            const updateState=[...state]
+
+            const board=updateState[boardIndex]
+            if(!board) return state
+
+            const updateList=[...board.lists]
+            updateList[listIndex]={
+                ...updateList[listIndex],
+                title: title
+            }
+
+            updateState[boardIndex]= {
+                ...board,
+                lists: updateList
             }
 
             return updateState

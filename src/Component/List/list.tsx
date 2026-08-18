@@ -7,6 +7,7 @@ import CreatItemModal from "../../modal/CreatItemModal/CreatItemModal";
 import { BoardContext } from "../../context/BoardContext";
 import { Bounce, toast } from "react-toastify";
 import DroppableComponent from "../../drag and drop/drop/DroppableComponent";
+import EditTitleListModal from "../../modal/EditTitleListModal/EditTitleListModal";
 
 type Props = {
     list: ListType
@@ -17,6 +18,7 @@ type Props = {
 export default function List({ list, listIndex, boardIndex }: Props): ReactNode {
 
     const modalRef = useRef<HTMLDialogElement | null>(null)
+    const editModalRef = useRef<HTMLDialogElement | null>(null)
 
     const { dispatchLists } = useContext(BoardContext)
 
@@ -42,13 +44,18 @@ export default function List({ list, listIndex, boardIndex }: Props): ReactNode 
     const showModal = () => {
         modalRef.current?.showModal()
     }
+
+    //Modal Edit
+    const showModalEdit = () => {
+        editModalRef.current?.showModal()
+    }
     return (
         <DroppableComponent id={list.id}>
             <div className="w-[300px] p-3 bg-gray-200 rounded-md shadow-sm shadow-gray-400">
                 <div className='flex justify-between items-center'>
                     <h3 className='font-medium'>{list.title}</h3>
                     <div className='flex gap-2'>
-                        <MdOutlineModeEdit className="cursor-pointer text-icon" size={18} />
+                        <MdOutlineModeEdit onClick={showModalEdit} className="cursor-pointer text-icon" size={18} />
                         <MdAddCircleOutline onClick={showModal} className="cursor-pointer text-icon" size={18} />
                         <MdDeleteOutline onClick={handleDeleteList} className="cursor-pointer text-icon" size={18} />
                     </div>
@@ -60,6 +67,10 @@ export default function List({ list, listIndex, boardIndex }: Props): ReactNode 
                 </div>
                 <Modal title={`Add Item to ${list.title}`} modalRef={modalRef}>
                     <CreatItemModal boardIndex={boardIndex} listIndex={listIndex} modalRef={modalRef} />
+                </Modal>
+
+                <Modal title={`Edit title list`} modalRef={editModalRef}>
+                    <EditTitleListModal boardIndex={boardIndex} listIndex={listIndex} editModalRef={editModalRef} />
                 </Modal>
             </div>
         </DroppableComponent>
