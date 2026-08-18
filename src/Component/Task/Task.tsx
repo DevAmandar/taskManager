@@ -11,7 +11,6 @@ type Props = {
 export default function Task({id, boardIndex, title, description}: Props): ReactNode {
 
     const { dispatchLists } = useContext(BoardContext)
-    // console.log('dispatchLists = ', dispatchLists)
 
     const handleRemoveBoard = () => {
         // debugger

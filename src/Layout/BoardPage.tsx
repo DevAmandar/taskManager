@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import BoardProvider from '../provider/BoardProvider'
 import Board from '../Component/Board/Board'
 import ActiveItemProvider from '../provider/ActiveItemProvider'
@@ -8,6 +8,8 @@ import { useConstant } from '@dnd-kit/react/hooks'
 import { BoardContext } from '../context/BoardContext'
 import { ItemType } from '../Type/item-type'
 import { Outlet, useParams } from 'react-router'
+import Modal from '../modal/Modal'
+import EditTitleTaskModal from '../modal/EditTitleTaskModal/EditTitleTaskModal'
 
 const BoardPage = () => {
 
@@ -29,17 +31,22 @@ const BoardPage = () => {
       const itemId = source.id as string
       const listId = target.id as string
       const formListId = itemData.listId as string
-      console.log(itemData)
       dispatchLists({ type: 'move_item',boardIndex: boardIndex, item: itemData, itemId: itemId, toListId: listId, fromListId: formListId })
     }
   }
 
+  const modalRef = useRef<HTMLDialogElement | null>(null)
+  const handleEditTitleBoard = () => {
+    modalRef.current?.showModal()
+  }
   return (
     <ActiveItemProvider>
       <DragDropProvider onDragEnd={handleDragEnd}>
 
-        <Board></Board>
-
+        <Board onClick={handleEditTitleBoard}></Board>
+        <Modal modalRef={modalRef} title='Edit title task'>
+          <EditTitleTaskModal modalRef={modalRef} boardIndex={boardIndex} />
+        </Modal>
       </DragDropProvider>
       <ToastContainer />
     </ActiveItemProvider>

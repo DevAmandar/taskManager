@@ -45,6 +45,11 @@ export type ListAction =
     {
         type: 'remove_task'
         taskId: string
+    } |
+    {
+        type: 'rename_board'
+        boardIndex: number
+        title: string
     }
 
 
@@ -192,8 +197,23 @@ export function ListReducers(state: BoardType[], action: ListAction): BoardType[
         case 'remove_task': {
             // debugger
             const { taskId } = action
-            const clone=[...state]
+            const clone = [...state]
             const updateState = clone.filter(board => board.taskId !== taskId)
+            return updateState
+        }
+        case "rename_board": {
+
+            const { title, boardIndex } = action
+
+            const board = state[boardIndex]
+
+            const updateState = [...state]
+
+            updateState[boardIndex] = {
+                ...board,
+                taskTitle: title
+            }
+
             return updateState
         }
 

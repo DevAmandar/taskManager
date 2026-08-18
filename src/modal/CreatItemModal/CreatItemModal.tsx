@@ -39,7 +39,6 @@ export default function CreatItemModal({ listIndex, modalRef, boardIndex }: Prop
     const validation = (title: string): boolean => {
         const { data, error } = TitleSchema.safeParse(title)
         if (error) {
-            console.log(error.issues[0].message)
             setShowError(error.issues[0].message)
             return false
         }

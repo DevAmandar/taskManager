@@ -44,7 +44,6 @@ export default function CreateTaskModal({ modalRef }: Props): ReactNode {
     const validation = (title: string, description: string): boolean => {
         const { data, error } = TaskSchema.safeParse({ title, description })
         if (error) {
-            console.log(error.issues[0].message)
             setShowError(error.issues[0].message)
             return false
         }

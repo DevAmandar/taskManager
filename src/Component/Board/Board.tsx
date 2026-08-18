@@ -9,7 +9,10 @@ import CreatListModal from '../../modal/CreatListModal/CreatListModal';
 import { useParams } from "react-router";
 import { Link } from "react-router";
 
-export default function Board(): ReactNode {
+type Props = {
+  onClick : () => void
+}
+export default function Board( { onClick }: Props): ReactNode {
 
   let params = useParams();
   const boardIndex = parseInt(params.id!, 10)
@@ -22,19 +25,15 @@ export default function Board(): ReactNode {
     modalRef.current?.showModal()
   }
 
-  //submit
-  const handleSubmit = (formData: FormData) => {
-    const title = formData.get('title') as string
-    const id = globalThis.crypto.randomUUID()
-
-    dispatchLists({ type: 'add_list',boardIndex: boardIndex,  listId: id, title: title })
+  const handleEditTitleBoard = () => {
+    onClick()
   }
   return (
     <>
       <div className='flex justify-between items-center m-6 p-3 rounded-md bg-gray-200 shadow-sm shadow-gray-400'>
-        <Link to="/test" className='font-bold'>Board Title {params.id}</Link>
+        <Link to="/test" className='font-bold'>{lists[boardIndex].taskTitle}</Link>
         <div className='flex gap-4'>
-          <MdOutlineModeEdit className='cursor-pointer text-icon' size={23} />
+          <MdOutlineModeEdit onClick={handleEditTitleBoard} className='cursor-pointer text-icon' size={23} />
           <MdAddCircleOutline onClick={showModal} className='cursor-pointer text-icon' size={23} />
         </div>
       </div>
