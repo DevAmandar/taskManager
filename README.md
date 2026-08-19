@@ -1,16 +1,36 @@
-# React + Vite
+# Task Manager (Kanban-style Drag & Drop)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight, interactive task management application inspired by Trello. Built with **React**, **TypeScript**, and **dnd-kit**, this app allows users to organize tasks into boards, lists, and items with full drag-and-drop support and persistent local storage.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- ✅ **Create, edit, and delete boards** (task projects)
+- ✅ **Add, rename, and delete lists** inside each board
+- ✅ **Add, move, and delete items** (tasks) within lists
+- ✅ **Drag & drop** items between lists using `dnd-kit`
+- ✅ **Persistent storage** – all data saved in `localStorage`
+- ✅ **Validation** with Zod (title/description length requirements)
+- ✅ **Toast notifications** for user feedback (react-toastify)
+- ✅ **Modal forms** for all create/edit actions
+- ✅ **Responsive UI** with Tailwind CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Technology | Purpose |
+|------------|---------|
+| React (v19) | UI framework |
+| TypeScript | Type safety |
+| dnd-kit | Drag & drop engine |
+| React Router | Navigation between boards |
+| Tailwind CSS | Styling |
+| Zod | Schema validation |
+| React Toastify | Toast notifications |
+| React Icons | Icon set |
+
+---
+
+## 📁 Project Structure (Key Files)
