@@ -1,5 +1,5 @@
 import { ReactNode, useContext, useRef } from "react";
-import Task from "../component/task/Task";
+import Task from "../Component/Task/Task";
 import Modal from "../modal/Modal";
 import CreateTaskModal from "../modal/CreateTaskModal/CreateTaskModal";
 import { BoardContext } from "../context/BoardContext";
