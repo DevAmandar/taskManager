@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router'
 import BoardPage from './Layout/BoardPage'
-import BoardProvider from './provider/BoardProvider'
+import BoardProvider from './Provider/BoardProvider'
 import TasksPage from './Layout/TasksPage'
 import { ToastContainer } from 'react-toastify'
 
