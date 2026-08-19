@@ -1,6 +1,6 @@
 import React, { FormEvent, ReactNode, useContext, useRef } from 'react'
 import { BoardContext } from '../../context/BoardContext'
-import List from '../List/List'
+import List from '../List/List_x'
 import { MdOutlineModeEdit, MdAddCircleOutline } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import Modal from '../../modal/Modal';
