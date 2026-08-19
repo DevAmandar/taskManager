@@ -8,9 +8,7 @@ function App() {
   return (
     <BoardProvider>
       <Routes>
-        {/* مسیر اصلی برای گیت‌هاب */}
-        <Route path="/taskManager/" element={<TasksPage />} />
-        {/* مسیر اصلی برای محیط توسعه (Localhost) */}
+        {/* فقط یک مسیر اصلی داریم */}
         <Route path="/" element={<TasksPage />} />
         <Route path="boardPage/:id" element={<BoardPage />} />
       </Routes>
