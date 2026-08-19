@@ -1,6 +1,6 @@
 import { useDraggable } from "@dnd-kit/react";
 import { PropsWithChildren, ReactNode } from "react";
-import { ItemType } from "../../Type/item-type";
+import { ItemType } from "../../type/item-type";
 
 type DraggableData = ItemType & { listId: string}
 

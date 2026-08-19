@@ -1,12 +1,12 @@
 import { ReactNode, RefObject, useContext, useRef, useState } from "react";
-import type { ListType } from "../../Type/list-type";
+import type { ListType } from "../../type/list-type";
 import Item from "../Item/Item";
 import { MdOutlineModeEdit, MdAddCircleOutline, MdDeleteOutline } from "react-icons/md";
 import Modal from "../../modal/Modal";
 import CreatItemModal from "../../modal/CreatItemModal/CreatItemModal";
 import { BoardContext } from "../../context/BoardContext";
 import { Bounce, toast } from "react-toastify";
-import DroppableComponent from "../../drag and drop/drop/DroppableComponent";
+import DroppableComponent from "../../drag_and_drop/drop/DroppableComponent";
 import EditTitleListModal from "../../modal/EditTitleListModal/EditTitleListModal";
 
 type Props = {

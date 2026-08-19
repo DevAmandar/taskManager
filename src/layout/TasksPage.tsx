@@ -1,9 +1,7 @@
 import { ReactNode, useContext, useRef } from "react";
-import Task from "../Component/Task/Task";
-import { listDatas } from "../data/listDatas";
+import Task from "../component/task/Task";
 import Modal from "../modal/Modal";
 import CreateTaskModal from "../modal/CreateTaskModal/CreateTaskModal";
-import { useConstant } from "@dnd-kit/react/hooks";
 import { BoardContext } from "../context/BoardContext";
 export default function TasksPage(): ReactNode {
 

@@ -1,12 +1,12 @@
 // Item.tsx
 import { ReactNode, useContext, useState } from "react";
-import { ItemType } from "../../Type/item-type";
+import { ItemType } from "../../type/item-type";
 import { BoardContext } from "../../context/BoardContext";
-import { ListType } from "../../Type/list-type";
+import { ListType } from "../../type/list-type";
 import { MdDelete } from "react-icons/md";
 import { ActiveItemContex } from "../../context/ActiveItemContext";
 import { Bounce, toast } from "react-toastify";
-import DraggableComponent from "../../drag and drop/drag/DraggableComponent";
+import DraggableComponent from "../../drag_and_drop/drag/DraggableComponent";
 
 type Props = {
     item: ItemType

@@ -1,5 +1,4 @@
 import { createContext } from "react"
-import { ItemType } from "../Type/item-type"
 
 type ContextValue = {
     activeId : string | null

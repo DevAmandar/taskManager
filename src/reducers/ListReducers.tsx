@@ -1,7 +1,7 @@
 // reducers/ListReducers.tsx
-import { ItemType } from "../Type/item-type"
-import { ListType } from "../Type/list-type"
-import { BoardType } from "../Type/board-type"
+import { ItemType } from "../type/item-type"
+import { ListType } from "../type/list-type"
+import { BoardType } from "../type/board-type"
 
 export type ListAction =
     {

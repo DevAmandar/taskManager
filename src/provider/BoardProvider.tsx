@@ -1,12 +1,12 @@
 import React, { Children, PropsWithChildren, useEffect, useReducer } from 'react'
 import type { ReactNode } from 'react'
 import { BoardContext } from '../context/BoardContext'
-import type { ListType } from '../Type/list-type'
+import type { ListType } from '../type/list-type'
 import { listData } from '../data/listData'
 import { listDatas } from '../data/listDatas'
 import { ListReducers } from '../reducers/ListReducers'
 import { useParams } from "react-router";
-import { BoardType } from '../Type/board-type'
+import { BoardType } from '../type/board-type'
 
 type Props = PropsWithChildren
 
