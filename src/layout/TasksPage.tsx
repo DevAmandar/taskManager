@@ -3,6 +3,7 @@ import Task from "../component/task/Task";
 import Modal from "../modal/Modal";
 import CreateTaskModal from "../modal/CreateTaskModal/CreateTaskModal";
 import { BoardContext } from "../context/BoardContext";
+
 export default function TasksPage(): ReactNode {
 
     const { lists } = useContext(BoardContext)

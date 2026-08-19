@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react'
-import Board from '../component/Board/Board'
+import Board from '../component/board/Board'
 import ActiveItemProvider from '../provider/ActiveItemProvider'
 import { DragDropProvider, DragEndEvent } from '@dnd-kit/react'
 import { BoardContext } from '../context/BoardContext'
