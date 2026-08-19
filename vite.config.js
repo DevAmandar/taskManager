@@ -4,13 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/taskManager/',
-  build: {
-    rollupOptions: {
-      input: {
-        main: './index.html',
-        404: './404.html',
-      },
-    },
-  },
+  // این خط تضمین می‌کند فایل‌ها در آدرس /taskManager/ پیدا شوند
+  base: '/taskManager/', 
 })

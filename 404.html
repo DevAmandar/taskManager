@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Redirect</title>
     <script>
-      // این اسکریپت کاربر را به صفحه اصلی برنامه هدایت می‌کند
-      // تا React Router مسیر را مدیریت کند
-      const path = window.location.pathname;
+      // مسیر اصلی سایت شما
       const base = '/taskManager/';
-      if (path !== base) {
-        window.location.href = base + '#/' + path.substring(base.length);
-      } else {
-        window.location.href = base + '#/';
+      // اگر کاربر در صفحه اصلی نیست، او را به صفحه اصلی ببر
+      if (window.location.pathname !== base) {
+        window.location.replace(base);
       }
     </script>
   </head>
