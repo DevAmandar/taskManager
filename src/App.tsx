@@ -9,7 +9,12 @@ function App() {
     <BoardProvider>
 
       <Routes>
+        {/* این خط جدید و بسیار مهم است! مسیر اصلی گیت‌هاب را به صفحه تسک‌ها هدایت می‌کند */}
+        <Route path="/taskManager/" element={<TasksPage />} />
+        
+        {/* مسیر قبلی را هم نگه می‌داریم تا در حالت توسعه (dev) کار کند */}
         <Route path="/" element={<TasksPage />} />
+        
         <Route path="boardPage/:id" element={<BoardPage />} />
       </Routes>
       <ToastContainer />
