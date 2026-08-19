@@ -1,5 +1,5 @@
 import { ReactNode, RefObject, useContext, useRef, useState } from "react";
-import type { ListType } from "../../type/list-type";
+import type { ListType } from "../../Type/list-type";
 import Item from "../Item/Item";
 import { MdOutlineModeEdit, MdAddCircleOutline, MdDeleteOutline } from "react-icons/md";
 import Modal from "../../modal/Modal";

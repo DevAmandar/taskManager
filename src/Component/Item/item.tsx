@@ -1,8 +1,8 @@
 // Item.tsx
 import { ReactNode, useContext, useState } from "react";
-import { ItemType } from "../../type/item-type";
+import { ItemType } from "../../Type/item-type";
 import { BoardContext } from "../../context/BoardContext";
-import { ListType } from "../../type/list-type";
+import { ListType } from "../../Type/list-type";
 import { MdDelete } from "react-icons/md";
 import { ActiveItemContex } from "../../context/ActiveItemContext";
 import { Bounce, toast } from "react-toastify";
