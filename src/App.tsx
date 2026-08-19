@@ -1,8 +1,7 @@
 import { Route, Routes } from 'react-router'
-import BoardPage from './layout/BoardPage'
+import BoardPage from './Layout/BoardPage'
 import BoardProvider from './provider/BoardProvider'
-import Test from './Test'
-import TasksPage from './layout/TasksPage'
+import TasksPage from './Layout/TasksPage'
 import { ToastContainer } from 'react-toastify'
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
       <Routes>
         <Route path="/" element={<TasksPage />} />
         <Route path="boardPage/:id" element={<BoardPage />} />
-        <Route path='test' element={<Test />} />
       </Routes>
       <ToastContainer />
 
