@@ -7,18 +7,14 @@ import { ToastContainer } from 'react-toastify'
 function App() {
   return (
     <BoardProvider>
-
       <Routes>
-        {/* این خط جدید و بسیار مهم است! مسیر اصلی گیت‌هاب را به صفحه تسک‌ها هدایت می‌کند */}
+        {/* مسیر اصلی برای گیت‌هاب */}
         <Route path="/taskManager/" element={<TasksPage />} />
-        
-        {/* مسیر قبلی را هم نگه می‌داریم تا در حالت توسعه (dev) کار کند */}
+        {/* مسیر اصلی برای محیط توسعه (Localhost) */}
         <Route path="/" element={<TasksPage />} />
-        
         <Route path="boardPage/:id" element={<BoardPage />} />
       </Routes>
       <ToastContainer />
-
     </BoardProvider>
   )
 }
